@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 
 const connectToDb = async () => {
   try {
-    await mongoose.connect(config.mongoose, { useMongoClient: true });
+    await mongoose.connect(config.mongoose);
   } catch (error) {
     console.log(error);
   }

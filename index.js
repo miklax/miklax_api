@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import connectToDb from './db/connect';
+import blog from './routes/blog.router';
+import config  from './config/config';
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.get('/', (req, res) => {
   res.send('miklax.com v2');
 });
 
+// app.use('/blog', blog);
+
 app.listen(3000, () => {
-  console.info('API je pokrenut na portu 3000');
+  console.info('API je pokrenut na portu %d', config.port);
 });
