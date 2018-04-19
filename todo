@@ -1,21 +1,17 @@
 TODO: 
 Headless API for blog and portfolio. 
-
-- db connection
-- model 
+ 
 - kontroleri
 - router
 
 ## Setup 
 config, basics
 
-
 ## Blog 
-blogPost(cuid, naslov, sadrzaj, datKreiranja(now), tagovi[])
+
 
 ## Portfolio
 porfolioPost(cuid, naslov, opis, klijent, datumProjekta, previewSlika, slike[], tagovi)
-
 
 - JWT - na kraju!
 ## User

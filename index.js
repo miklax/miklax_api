@@ -1,7 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import connectToDb from './db/connect';
 
 const app = express();
+
+// init connect to mongo
+connectToDb();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
