@@ -9,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://mikla@bitbucket.org/mikla/miklax_api.git"
+    "url": "git+https://github.com/miklax/miklax_api.git"
   },
   "author": "Mihail Miklasevskij",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/mikla/miklax_api#readme",
+  "homepage": "https://github.com/miklax/miklax_api/blob/master/README.md",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
