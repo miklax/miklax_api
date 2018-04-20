@@ -1,4 +1,4 @@
 export default {
   port: 3000,
-  mongoUrl: 'mongodb://localhost:27017/miklaportfolio',
+  mongoUrl: 'mongodb://miklax:miklaxdb@ds249079.mlab.com:49079/mkldb',
 };
