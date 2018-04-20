@@ -8,8 +8,6 @@ const BlogController = {};
 // AddBlog
 BlogController.addBlog = async (req, res) => {
   try {
-    console.log('trigg model');
-
     if (!req.body.blog.naslov || !req.body.blog.sadrzaj) {
       res.status(403).end();
     }
@@ -19,8 +17,9 @@ BlogController.addBlog = async (req, res) => {
     // read from json and sanitize
     newBlog.naslov = sanitizeHtml(newBlog.naslov);
     newBlog.sadrzaj = sanitizeHtml(newBlog.sadrzaj);
+    newBlog.tagovi = newBlog.tagovi.map(tag => sanitizeHtml(tag));
 
-    newBlog.slug = slug(newBlog.naslov.toLoverCase(), { lowercase: true });
+    newBlog.slug = slug(newBlog.naslov.toLowerCase(), { lowercase: true });
     newBlog.cuid = cuid();
 
     await newBlog.save((err, saved) => {
