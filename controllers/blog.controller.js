@@ -49,8 +49,9 @@ BlogController.listBlog = async (req, res) => {
   }
 };
 
+// updateBlog
+
 // DeeteBlog
 
-// updateBlog
 
 export default BlogController;
