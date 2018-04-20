@@ -8,6 +8,8 @@ const BlogController = {};
 // AddBlog
 BlogController.addBlog = async (req, res) => {
   try {
+    console.log('trigg model');
+
     if (!req.body.blog.naslov || !req.body.blog.sadrzaj) {
       res.status(403).end();
     }

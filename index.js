@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import connectToDb from './db/connect';
 import blog from './routes/blog.router';
-import config  from './config/config';
+import config from './config/config';
 
 const app = express();
 
