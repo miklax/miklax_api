@@ -9,7 +9,7 @@ router.post('/blog', (req, res) => {
 });
 
 router.get('/blog', (req, res) => {
-  res.send({ blog: 'its working' });
+  BlogController.listBlog(req, res);
 });
 
 export default router;

@@ -35,6 +35,19 @@ BlogController.addBlog = async (req, res) => {
 };
 
 // ListAll
+BlogController.listBlog = async (req, res) => {
+  try {
+    Blog.find().sort('-datKreiranja').exec((err, data) => {
+      if (err) {
+        res.send(500).send(err);
+      }
+
+      res.send(data);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // DeeteBlog
 
