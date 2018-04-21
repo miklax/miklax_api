@@ -50,7 +50,37 @@ BlogController.listBlog = async (req, res) => {
 };
 
 // updateBlog
+BlogController.updateBlog = async (req, res) => {
+  try {
+    if (!req.body.blog.naslov || !req.body.blog.sadrzaj) {
+      res.status(403).end();
+    }
 
+    Blog.findOne({ cuid: req.params.cuid }).exec((err, blog) => {
+      const blogParam = blog;
+
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        blogParam.title = req.body.blog.naslov || blog.naslov;
+        blogParam.sadrzaj = req.body.blog.sadrzaj || blog.sadrzaj;
+        blogParam.sadrzaj = req.body.blog.sadrzaj || blog.sadrzaj;
+        console.log('Post about to be saved');
+        // Save
+        blog.save((error, saved) => {
+          if (error) {
+            res.status(500).send(err);
+          }
+          res.json({ post: saved });
+        });
+      }
+    });
+  } catch (error) {
+    if (error) {
+      console.log(error);
+    }
+  }
+};
 
 // DeleteBlog
 BlogController.deleteBlog = async (req, res) => {
