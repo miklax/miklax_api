@@ -65,6 +65,7 @@ BlogController.updateBlog = async (req, res) => {
         blogParam.title = req.body.blog.naslov || blog.naslov;
         blogParam.sadrzaj = req.body.blog.sadrzaj || blog.sadrzaj;
         blogParam.sadrzaj = req.body.blog.sadrzaj || blog.sadrzaj;
+        // TODO: update tags
         console.log('Post about to be saved');
         // Save
         blog.save((error, saved) => {
