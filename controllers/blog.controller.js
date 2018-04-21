@@ -57,19 +57,18 @@ BlogController.updateBlog = async (req, res) => {
     }
 
     Blog.findOne({ cuid: req.params.cuid }).exec((err, blog) => {
-      const blogEdit = blog;
+      let blogEdit = blog;
 
       if (err) {
         res.status(500).send(err);
       } else {
-        blogEdit.title = req.body.blog.naslov || blog.naslov;
-        blogEdit.sadrzaj = req.body.blog.sadrzaj || blog.sadrzaj;
+        blogEdit.naslov = req.body.blog.naslov || blog.naslov;
         blogEdit.sadrzaj = req.body.blog.sadrzaj || blog.sadrzaj;
         // TODO: update tags fix to push or pull
         blogEdit.tagovi = blog.tagovi.map(tag => sanitizeHtml(tag)) || blog.tagovi;
         console.log('Post about to be saved');
         // Save
-        blog.save((error, saved) => {
+        blogEdit.save((error, saved) => {
           if (error) {
             res.status(500).send(err);
           }
