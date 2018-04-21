@@ -37,7 +37,7 @@ BlogController.addBlog = async (req, res) => {
 // ListAll
 BlogController.listBlog = async (req, res) => {
   try {
-    Blog.find().sort('-datKreiranja').exec((err, data) => {
+    await Blog.find().sort('-datKreiranja').exec((err, data) => {
       if (err) {
         res.send(500).send(err);
       }
@@ -51,7 +51,22 @@ BlogController.listBlog = async (req, res) => {
 
 // updateBlog
 
-// DeeteBlog
 
+// DeleteBlog
+BlogController.deleteBlog = async (req, res) => {
+  try {
+    await Blog.findOne({ cuid: req.params.cuid }).exec((err, blog) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+
+      blog.remove(() => {
+        res.status(200).end();
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default BlogController;
