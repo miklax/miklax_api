@@ -52,16 +52,16 @@ BlogController.listBlog = async (req, res) => {
 // updateBlog
 BlogController.updateBlog = async (req, res) => {
   try {
-    if (!req.body.blog.naslov || !req.body.blog.sadrzaj) {
+    if (!req.body.blog.naslov && !req.body.blog.sadrzaj) {
       res.status(403).end();
     }
 
-    Blog.findOne({ cuid: req.params.cuid }).exec((err, blog) => {
-      let blogEdit = blog;
-
+    await Blog.findOne({ cuid: req.params.cuid }).exec((err, blog) => {
       if (err) {
         res.status(500).send(err);
       } else {
+        const blogEdit = blog;
+
         blogEdit.naslov = req.body.blog.naslov || blog.naslov;
         blogEdit.sadrzaj = req.body.blog.sadrzaj || blog.sadrzaj;
         // TODO: update tags fix to push or pull
