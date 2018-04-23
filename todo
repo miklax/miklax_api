@@ -2,15 +2,14 @@ TODO:
 Headless API for blog and portfolio. 
  
 ## Setup 
-config, basics
+
 
 ## Blog 
-- full controller
 - blog controller delete protection from crashing after deleting 2x due network lag
 
 
 ## Portfolio
-porfolioPost(cuid, naslov, opis, klijent, datumProjekta, previewSlika, slike[], tagovi)
+
 
 - JWT - na kraju!
 ## User

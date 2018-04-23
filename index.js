@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+import path from 'path';
 import connectToDb from './db/connect';
 import blog from './routes/blog.router';
 import config from './config/config';
@@ -9,6 +10,8 @@ const app = express();
 
 // init connect to mongo
 connectToDb();
+
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
