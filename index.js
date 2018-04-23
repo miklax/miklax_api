@@ -11,7 +11,7 @@ const app = express();
 // init connect to mongo
 connectToDb();
 
-app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
