@@ -22,11 +22,11 @@ PortfolioController.addPortf = async (req, res) => {
     portf.slug = slug(portf.naslov.toLowerCase(), { lowercase: true });
 
     await portf.save((err, saved) => {
-      if (err) { 
+      if (err) {
         res.status(500).send(err);
       }
 
-      res.send({ blog: saved });
+      res.send({ portfolio: saved });
     });
   } catch (error) {
     console.log(error);
@@ -35,22 +35,80 @@ PortfolioController.addPortf = async (req, res) => {
 
 // list all
 PortfolioController.listPortf = async (req, res) => {
+  try {
+    await Portfolio.find().sord('-datProjekta').exec((err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      }
 
+      res.send(data);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // list one
 PortfolioController.listOnePortf = async (req, res) => {
+  try {
+    await Portfolio.findOne({ cuid: req.params.cuid }).exec((err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      }
 
+      res.send(data);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // update
 PortfolioController.updatePortf = async (req, res) => {
+  if (!req.body.portfolio.naslov && !req.body.portfolio.opis) {
+    res.status(403).end();
+  }
 
+  try {
+    await Portfolio.findOne({ cuid: req.params.cuid }).exec((err, portfolio) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+
+      const dataEdit = portfolio;
+      dataEdit.naslov = req.body.portfolio.naslov || portfolio.naslov;
+      dataEdit.opis = req.body.portfolio.opis || portfolio.opis;
+      // TODO: update tags fix to push or pull
+      dataEdit.tagovi = portfolio.tagovi.map(tag => sanitizeHtml(tag)) || portfolio.tagovi;
+      console.log('Post about to be saved');
+      // Save
+      dataEdit.save((error, saved) => {
+        if (error) {
+          res.status(500).send(err);
+        }
+        res.json({ post: saved });
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // delete
 PortfolioController.deletePortf = async (req, res) => {
+  try {
+    await Portfolio.findOne({ cuid: req.params.cuid }).exec((err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      }
 
+      data.remove(() => {
+        res.status(200).end();
+      });
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default PortfolioController;
